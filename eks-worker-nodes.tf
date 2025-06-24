@@ -5,7 +5,8 @@
 #
 
 resource "aws_iam_role" "tsp-cluster-node" {
-  name = "tsp-cluster-node"
+  name = "tsp-cluster-node-${terraform.workspace}"
+
 
   assume_role_policy = <<POLICY
 {
@@ -98,9 +99,9 @@ resource "aws_eks_node_group" "tsp-cluster-node-group" {
   node_group_name = "tsp-cluster-node-group"
   node_role_arn   = aws_iam_role.tsp-cluster-node.arn
   subnet_ids      = aws_subnet.tsp-vpc[*].id
-  instance_types = [var.eks_node_instance_type]
-  remote_access{
-      ec2_ssh_key = var.key_pair_name
+  instance_types  = [var.eks_node_instance_type]
+  remote_access {
+    ec2_ssh_key = var.key_pair_name
   }
 
 

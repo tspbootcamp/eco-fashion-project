@@ -6,7 +6,7 @@
 #
 
 resource "aws_iam_role" "tsp-cluster" {
-  name = "tsp-cluster"
+  name = "tsp-cluster-${terraform.workspace}"
 
   assume_role_policy = <<POLICY
 {
@@ -35,7 +35,7 @@ resource "aws_iam_role_policy_attachment" "tsp-cluster-AmazonEKSServicePolicy" {
 }
 
 resource "aws_security_group" "tsp-cluster" {
-  name        = "tsp-cluster-sg"
+  name        = "tsp-cluster-sg-${terraform.workspace}"
   description = "Cluster communication with worker nodes"
   vpc_id      = aws_vpc.tsp-vpc.id
 
@@ -47,7 +47,7 @@ resource "aws_security_group" "tsp-cluster" {
   }
 
   tags = {
-    Name = "tsp-cluster"
+    Name = "tsp-cluster-${terraform.workspace}"
   }
 }
 
@@ -62,7 +62,7 @@ resource "aws_security_group_rule" "tsp-cluster-ingress-workstation-https" {
 }
 
 resource "aws_eks_cluster" "tsp-cluster" {
-  name     = var.cluster-name
+  name     = var.cluster-name != "" ? var.cluster-name : "tsp-cluster-${terraform.workspace}"
   role_arn = aws_iam_role.tsp-cluster.arn
 
   vpc_config {
