@@ -367,8 +367,8 @@ metadata:
   labels:
     app: frontend
   annotations:
-    # This annotation is for Classic ELB (HTTP health check on "/")
     service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: /
+    external-dns.alpha.kubernetes.io/hostname: app.example.com.
 spec:
   type: LoadBalancer
   selector:
