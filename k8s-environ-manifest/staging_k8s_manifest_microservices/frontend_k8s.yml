@@ -114,7 +114,7 @@ metadata:
     app: frontend
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: /
-    external-dns.alpha.kubernetes.io/hostname: app.example.com.
+    external-dns.alpha.kubernetes.io/hostname: dev.charlesabe.com.
 spec:
   type: LoadBalancer
   selector:
@@ -124,7 +124,6 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 8080
-
 ---
 apiVersion: v1
 kind: ServiceAccount

@@ -118,3 +118,32 @@ resource "aws_eks_node_group" "tsp-cluster-node-group" {
     aws_iam_role_policy_attachment.tsp-cluster-node-AmazonEC2ContainerRegistryReadOnly,
   ]
 }
+
+# ------------------------------------------------------------------------------
+# ExternalDNS: Add IAM Policy to Allow Route53 DNS Updates
+# ------------------------------------------------------------------------------
+
+# ExternalDNS IAM Policy Document
+data "aws_iam_policy_document" "external_dns" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "route53:ChangeResourceRecordSets",
+      "route53:ListResourceRecordSets",
+      "route53:ListHostedZones"
+    ]
+    resources = ["*"]
+  }
+}
+
+# ExternalDNS IAM Policy
+resource "aws_iam_policy" "external_dns" {
+  name   = "external-dns-policy-${terraform.workspace}"
+  policy = data.aws_iam_policy_document.external_dns.json
+}
+
+# Attach ExternalDNS Policy to EKS Node Role
+resource "aws_iam_role_policy_attachment" "external_dns_attach" {
+  policy_arn = aws_iam_policy.external_dns.arn
+  role       = aws_iam_role.tsp-cluster-node.name
+}
