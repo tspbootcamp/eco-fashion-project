@@ -29,7 +29,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: charlino4u/paymentservice:latest
+        image: marypearl/paymentservice:latest
         ports:
         - containerPort: 50051
         env:

@@ -28,7 +28,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: charlino4u/shippingservice:latest
+        image: marypearl/shippingservice:latest
         ports:
         - containerPort: 50051
         env:

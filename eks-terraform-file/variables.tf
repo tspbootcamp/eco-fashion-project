@@ -8,7 +8,7 @@ variable "cluster-name" {
   type        = string
 }
 variable "key_pair_name" {
-  default = "tspcloud"
+  default = "Marypearl"
 }
 variable "eks_node_instance_type" {
   default = "t3.medium"

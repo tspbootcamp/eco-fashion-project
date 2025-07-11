@@ -30,7 +30,7 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
-          image: charlino4u/frontend:latest
+          image: marypearl/frontend:latest
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -114,7 +114,7 @@ metadata:
     app: frontend
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: /
-    external-dns.alpha.kubernetes.io/hostname: dev.charlesabe.com.
+    external-dns.alpha.kubernetes.io/hostname: dev.maryerhabor.com.
 spec:
   type: LoadBalancer
   selector:

@@ -4,6 +4,9 @@ terraform workspace new prod
 
 #to select env
 #terraform workspace select dev
+#terraform workspace show
+#terraform workspace select default
+#terraform workspace list
 
 #to initialize and deploy per env
 # terraform init -reconfigure
